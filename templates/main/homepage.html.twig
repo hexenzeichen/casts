@@ -3,5 +3,12 @@
 </h1>
 
 <div>
-    Browse through {{ numberOfStarships }} starships!
+    Browse through {{ numberOfStarships * 10 }} starships!
 </div>
+
+{% if numberOfStarships > 400 %}
+    <p>
+        {# Do you think "shiploads" will pass the legal team? #}
+        That's a shiploads of ships!
+    </p>
+{% endif %}
