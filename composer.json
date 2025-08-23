@@ -72,6 +72,7 @@
         }
     },
     "require-dev": {
+        "symfony/apache-pack": "*",
         "symfony/debug-bundle": "8.0.*",
         "symfony/stopwatch": "8.0.*",
         "symfony/web-profiler-bundle": "8.0.*"
