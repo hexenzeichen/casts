@@ -23,14 +23,12 @@ class MainController extends AbstractController
 
         $response = $client->request('GET', 'https://api.wheretheiss.at/v1/satellites/25544');
         $issData = $response->toArray();
-        dump($issData);
-
-
 
         return $this->render('main/homepage.html.twig',
             [
                 'myShip' => $myShip,
                 'ships' => $ships,
+                'issData' => $issData,
             ]);
     }
 }
