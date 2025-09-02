@@ -17,7 +17,9 @@ framework:
         #app: cache.adapter.apcu
         app: cache.adapter.array
           # Namespaced pools use the above "app" backend by default
-          #pools:
+        pools:
+            iss_location_pool:
+                default_lifetime: 15
         #my.dedicated.cache: null
     #esi: true
     #fragments: true
