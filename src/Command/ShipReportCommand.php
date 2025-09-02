@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -47,7 +48,6 @@ class ShipReportCommand extends Command
             usleep(10000);
         }
         $io->progressFinish();
-
 
         $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
 

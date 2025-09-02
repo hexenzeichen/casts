@@ -57,6 +57,4 @@ class Starship
     {
         return $this->arrivedAt;
     }
-
-
 }
