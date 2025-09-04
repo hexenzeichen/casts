@@ -10,3 +10,6 @@ RUN docker-php-ext-install zip pdo pdo_mysql mysqli intl gd pcntl
 
 # Enable apache modules
 RUN a2enmod rewrite
+
+# Install symfony console
+COPY --link --from=ghcr.io/symfony-cli/symfony-cli:latest /usr/local/bin/symfony /usr/local/bin/symfony
