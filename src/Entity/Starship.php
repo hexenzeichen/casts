@@ -14,16 +14,16 @@ class Starship
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column]
     private ?string $class = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column]
     private ?string $captain = null;
 
-    #[ORM\Column(enumType: StarshipStatusEnum::class)]
+    #[ORM\Column]
     private ?StarshipStatusEnum $status = null;
 
     #[ORM\Column]
@@ -92,5 +92,19 @@ class Starship
         $this->arrivedAt = $arrivedAt;
 
         return $this;
+    }
+
+    public function getStatusString(): string
+    {
+        return $this->status->value;
+    }
+
+    public function getStatusImageFilename(): string
+    {
+        return match ($this->status) {
+            StarshipStatusEnum::WAITING => 'images/status-waiting.png',
+            StarshipStatusEnum::IN_PROGRESS => 'images/status-in-progress.png',
+            StarshipStatusEnum::COMPLETED => 'images/status-complete.png',
+        };
     }
 }
