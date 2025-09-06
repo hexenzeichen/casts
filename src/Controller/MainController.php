@@ -4,20 +4,19 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Repository\StarshipRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Contracts\Cache\CacheInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class MainController extends AbstractController
 {
     #[Route('/', name: 'app_homepage')]
     public function homepage(
-        StarshipRepository $starshipRepository,
-    ): Response {
-        $ships = $starshipRepository->findAll();
+        EntityManagerInterface $em,
+    ): Response
+    {
+        $ships = $em->createQuery('SELECT s FROM App\Entity\Starship s')->getResult();
         $myShip = $ships[array_rand($ships)];
 
         return $this->render('main/homepage.html.twig',
