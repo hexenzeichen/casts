@@ -11,9 +11,7 @@ class AppExtensionRuntime implements RuntimeExtensionInterface
     public function __construct(
         private HttpClientInterface $client,
         private CacheInterface $issLocationPool,
-    )
-    {
-
+    ) {
     }
 
     public function getIssLocationData()

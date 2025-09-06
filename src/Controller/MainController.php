@@ -15,8 +15,7 @@ class MainController extends AbstractController
     #[Route('/', name: 'app_homepage')]
     public function homepage(
         EntityManagerInterface $em,
-    ): Response
-    {
+    ): Response {
         $ships = $em->createQueryBuilder()
             ->select('s')
             ->from(Starship::class, 's')
