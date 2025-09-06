@@ -16,7 +16,12 @@ class MainController extends AbstractController
         EntityManagerInterface $em,
     ): Response
     {
-        $ships = $em->createQuery('SELECT s FROM App\Entity\Starship s')->getResult();
+        $ships = $em->createQueryBuilder()
+            ->select('s')
+            ->from(Starship::class, 's')
+            ->getQuery()
+            ->getResult();
+
         $myShip = $ships[array_rand($ships)];
 
         return $this->render('main/homepage.html.twig',
