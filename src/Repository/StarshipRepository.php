@@ -6,6 +6,8 @@ use App\Entity\Starship;
 use App\Entity\StarshipStatusEnum;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 
 /**
  * @extends ServiceEntityRepository<Starship>
@@ -20,15 +22,17 @@ class StarshipRepository extends ServiceEntityRepository
     /**
      * @return Starship[]
      */
-    public function findIncomplete(): array
+    public function findIncomplete(): Pagerfanta
     {
-        return $this->createQueryBuilder('s')
+        $query = $this->createQueryBuilder('s')
             ->where('s.status != :status')
             ->orderBy('s.arrivedAt', 'DESC')
             ->setParameter('status', StarshipStatusEnum::COMPLETED)
+            ->orderBy('s.arrivedAt', 'DESC')
             ->getQuery()
-            ->getResult()
             ;
+
+        return new Pagerfanta(new QueryAdapter($query));
     }
 
     public function findMyShip(): Starship
