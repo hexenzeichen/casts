@@ -28,13 +28,13 @@ class Starship
     #[ORM\Column]
     private ?\DateTimeImmutable $arrivedAt = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(unique: true)]
     private ?string $slug = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column()]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column()]
     private ?\DateTimeImmutable $createdAt = null;
 
     public function getId(): ?int
