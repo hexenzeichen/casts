@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\StarshipRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\Slug;
+use Gedmo\Mapping\Annotation\Timestampable;
 
 #[ORM\Entity(repositoryClass: StarshipRepository::class)]
 class Starship
@@ -29,12 +31,15 @@ class Starship
     private ?\DateTimeImmutable $arrivedAt = null;
 
     #[ORM\Column(unique: true)]
+    #[Slug(fields: ['name'])]
     private ?string $slug = null;
 
     #[ORM\Column()]
+    #[Timestampable(on: 'update')]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column()]
+    #[Timestampable(on: 'create')]
     private ?\DateTimeImmutable $createdAt = null;
 
     public function getId(): ?int
