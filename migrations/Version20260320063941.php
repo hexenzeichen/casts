@@ -11,7 +11,7 @@ final class Version20260320063941 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Add a relation betweeb starship and starship_part';
+        return 'Add a relation between starship and starship_part';
     }
 
     public function up(Schema $schema): void
