@@ -37,24 +37,7 @@ class AppFixtures extends Fixture
         $manager->persist($part);
         $manager->flush();
 
-
-
-        StarshipFactory::createOne([
-            'name' => 'USS Espresso (NCC-1234-C)',
-            'class' => 'Latte',
-            'captain' => 'James T. Quick!',
-            'status' => StarshipStatusEnum::COMPLETED,
-            'arrivedAt' => new \DateTimeImmutable('-1 week'),
-        ]);
-        StarshipFactory::createOne([
-            'name' => 'USS Wanderlust (NCC-2024-W)',
-            'class' => 'Delta Tourist',
-            'captain' => 'Kathryn Journeyway',
-            'status' => StarshipStatusEnum::WAITING,
-            'arrivedAt' => new \DateTimeImmutable('-1 month'),
-        ]);
-
         StarshipFactory::createMany(20);
-//        StarshipPartFactory::createMany(50);
+        StarshipPartFactory::createMany(50);
     }
 }
