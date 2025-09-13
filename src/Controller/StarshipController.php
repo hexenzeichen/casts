@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Starship;
+use App\Repository\StarshipPartRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +16,7 @@ class StarshipController extends AbstractController
     #[Route('/starships/{slug}', name: 'app_starship_show')]
     public function show(
         #[MapEntity(mapping: ['slug' => 'slug'])]
-        Starship $ship
+        Starship $ship,
     ): Response
     {
         return $this->render('starship/show.html.twig', [
