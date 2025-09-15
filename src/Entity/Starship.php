@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
+use App\Repository\StarshipPartRepository;
 use App\Repository\StarshipRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
 use Gedmo\Mapping\Annotation\Timestampable;
@@ -192,8 +192,7 @@ class Starship
      */
     public function getExpensiveParts(): Collection
     {
-        $criteria = Criteria::create()->andWhere(Criteria::expr()->gt('price', 50000));
-        return $this->parts->matching($criteria);
+        return $this->parts->matching(StarshipPartRepository::createExpensiveCriteria());
     }
 
     public function addPart(StarshipPart $part): static
