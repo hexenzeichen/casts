@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Droid;
 use App\Entity\Starship;
 use App\Entity\StarshipPart;
 use App\Entity\StarshipStatusEnum;
@@ -15,13 +16,32 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        StarshipFactory::createOne([
+        $starship = StarshipFactory::createOne([
             'name' => 'USS LeafyCruiser (NCC-0001)',
             'class' => 'Garden',
             'captain' => 'Jean-Luc Pickles',
             'status' => StarshipStatusEnum::IN_PROGRESS,
             'arrivedAt' => new \DateTimeImmutable('-1 day'),
         ]);
+
+        $droid1 = new Droid();
+        $droid1->setName('IHOP-123');
+        $droid1->setPrimaryFunction('Pancake chef');
+        $droid1->addStarship($starship);
+        $manager->persist($droid1);
+
+        $droid2 = new Droid();
+        $droid2->setName('D-3P0');
+        $droid2->setPrimaryFunction('C-3PO\'s voice coach');
+        $droid2->addStarship($starship);
+        $manager->persist($droid2);
+
+        $droid3 = new Droid();
+        $droid3->setName('BONK-5000');
+        $droid3->setPrimaryFunction('Comedy sidekick');
+        $droid3->addStarship($starship);
+        $manager->persist($droid3);
+        $manager->flush();
 
         $starship = new Starship();
         $starship->setName('USS Taco Tuesday');
