@@ -21,15 +21,8 @@ class Droid
     #[ORM\Column(length: 255)]
     private ?string $primaryFunction = null;
 
-    /**
-     * @var Collection<int, Starship>
-     */
-    #[ORM\ManyToMany(targetEntity: Starship::class, mappedBy: 'droids')]
-    private Collection $starships;
-
     public function __construct()
     {
-        $this->starships = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -61,30 +54,4 @@ class Droid
         return $this;
     }
 
-    /**
-     * @return Collection<int, Starship>
-     */
-    public function getStarships(): Collection
-    {
-        return $this->starships;
-    }
-
-    public function addStarship(Starship $starship): static
-    {
-        if (!$this->starships->contains($starship)) {
-            $this->starships->add($starship);
-            $starship->addDroid($this);
-        }
-
-        return $this;
-    }
-
-    public function removeStarship(Starship $starship): static
-    {
-        if ($this->starships->removeElement($starship)) {
-            $starship->removeDroid($this);
-        }
-
-        return $this;
-    }
 }
