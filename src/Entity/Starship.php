@@ -52,10 +52,17 @@ class Starship
     #[ORM\OrderBy(['name' => 'ASC'])]
     private Collection $parts;
 
+    /**
+     * @var Collection<int, StarshipDroid>
+     */
+    #[ORM\OneToMany(targetEntity: StarshipDroid::class, mappedBy: 'staship')]
+    private Collection $starshipDroids;
+
 
     public function __construct()
     {
         $this->parts = new ArrayCollection();
+        $this->starshipDroids = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -212,6 +219,36 @@ class Starship
             // set the owning side to null (unless already changed)
             if ($part->getStarship() === $this) {
                 $part->setStarship(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, StarshipDroid>
+     */
+    public function getStarshipDroids(): Collection
+    {
+        return $this->starshipDroids;
+    }
+
+    public function addStarshipDroid(StarshipDroid $starshipDroid): static
+    {
+        if (!$this->starshipDroids->contains($starshipDroid)) {
+            $this->starshipDroids->add($starshipDroid);
+            $starshipDroid->setStaship($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStarshipDroid(StarshipDroid $starshipDroid): static
+    {
+        if ($this->starshipDroids->removeElement($starshipDroid)) {
+            // set the owning side to null (unless already changed)
+            if ($starshipDroid->getStaship() === $this) {
+                $starshipDroid->setStaship(null);
             }
         }
 

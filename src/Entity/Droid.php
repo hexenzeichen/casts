@@ -21,8 +21,15 @@ class Droid
     #[ORM\Column(length: 255)]
     private ?string $primaryFunction = null;
 
+    /**
+     * @var Collection<int, StarshipDroid>
+     */
+    #[ORM\OneToMany(targetEntity: StarshipDroid::class, mappedBy: 'droid')]
+    private Collection $starshipDroids;
+
     public function __construct()
     {
+        $this->starshipDroids = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -50,6 +57,36 @@ class Droid
     public function setPrimaryFunction(string $primaryFunction): static
     {
         $this->primaryFunction = $primaryFunction;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, StarshipDroid>
+     */
+    public function getStarshipDroids(): Collection
+    {
+        return $this->starshipDroids;
+    }
+
+    public function addStarshipDroid(StarshipDroid $starshipDroid): static
+    {
+        if (!$this->starshipDroids->contains($starshipDroid)) {
+            $this->starshipDroids->add($starshipDroid);
+            $starshipDroid->setDroid($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStarshipDroid(StarshipDroid $starshipDroid): static
+    {
+        if ($this->starshipDroids->removeElement($starshipDroid)) {
+            // set the owning side to null (unless already changed)
+            if ($starshipDroid->getDroid() === $this) {
+                $starshipDroid->setDroid(null);
+            }
+        }
 
         return $this;
     }
