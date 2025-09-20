@@ -55,7 +55,7 @@ class Starship
     /**
      * @var Collection<int, StarshipDroid>
      */
-    #[ORM\OneToMany(targetEntity: StarshipDroid::class, mappedBy: 'staship')]
+    #[ORM\OneToMany(targetEntity: StarshipDroid::class, mappedBy: 'starship')]
     private Collection $starshipDroids;
 
 
@@ -237,7 +237,7 @@ class Starship
     {
         if (!$this->starshipDroids->contains($starshipDroid)) {
             $this->starshipDroids->add($starshipDroid);
-            $starshipDroid->setStaship($this);
+            $starshipDroid->setStarship($this);
         }
 
         return $this;
@@ -247,8 +247,8 @@ class Starship
     {
         if ($this->starshipDroids->removeElement($starshipDroid)) {
             // set the owning side to null (unless already changed)
-            if ($starshipDroid->getStaship() === $this) {
-                $starshipDroid->setStaship(null);
+            if ($starshipDroid->getStarship() === $this) {
+                $starshipDroid->setStarship(null);
             }
         }
 

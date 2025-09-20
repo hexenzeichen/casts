@@ -18,7 +18,7 @@ class StarshipDroid
 
     #[ORM\ManyToOne(inversedBy: 'starshipDroids')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Starship $staship = null;
+    private ?Starship $starship = null;
 
     #[ORM\ManyToOne(inversedBy: 'starshipDroids')]
     #[ORM\JoinColumn(nullable: false)]
@@ -46,14 +46,14 @@ class StarshipDroid
         return $this;
     }
 
-    public function getStaship(): ?Starship
+    public function getStarship(): ?Starship
     {
-        return $this->staship;
+        return $this->starship;
     }
 
-    public function setStaship(?Starship $staship): static
+    public function setStarship(?Starship $starship): static
     {
-        $this->staship = $staship;
+        $this->starship = $starship;
 
         return $this;
     }
