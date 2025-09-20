@@ -91,4 +91,9 @@ class Droid
         return $this;
     }
 
+    public function getStarships(): Collection
+    {
+        return $this->starshipDroids->map(fn (StarshipDroid $starshipDroid) => $starshipDroid->getStarship());
+    }
+
 }
