@@ -255,4 +255,14 @@ class Starship
         return $this;
     }
 
+    public function getDroids(): Collection
+    {
+        return $this->starshipDroids->map(fn (StarshipDroid $starshipDroid) => $starshipDroid->getDroid());
+    }
+
+    public function getDroidNames(): string
+    {
+        return implode(', ', $this->getDroids()->map(fn(Droid $droid) => $droid->getName())->toArray());
+    }
+
 }
