@@ -14,11 +14,13 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
     public function supports(Request $request): bool
     {
-        // TODO: Implement supports() method.
+        return $request->attributes->get('_route') === 'app_login'
+        && $request->isMethod('POST');
     }
 
     public function authenticate(Request $request): Passport
     {
+        dump($request->request->all());die;
         // TODO: Implement authenticate() method.
     }
 
