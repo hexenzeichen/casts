@@ -4,6 +4,7 @@ namespace App\Factory;
 
 use App\Entity\Droid;
 use App\Entity\User;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
@@ -16,8 +17,12 @@ final class UserFactory extends PersistentObjectFactory
      *
      * @todo inject services if required
      */
-    public function __construct()
+    private UserPasswordHasherInterface $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
+        parent::__construct();
+        $this->passwordHasher = $passwordHasher;
     }
 
     #[\Override]
@@ -37,6 +42,7 @@ final class UserFactory extends PersistentObjectFactory
         return [
             'email' => self::faker()->email(),
             'firstName' => self::faker()->firstName(),
+            'plainPassword' => 'tada',
         ];
     }
 
@@ -47,7 +53,13 @@ final class UserFactory extends PersistentObjectFactory
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(Droid $droid): void {})
-        ;
+            ->afterInstantiate(function(User $user) {
+                if ($user->getPlainPassword()) {
+                    $user->setPassword(
+                        $this->passwordHasher->hashPassword($user, $user->getPlainPassword())
+                    );
+                }
+            })
+            ;
     }
 }
