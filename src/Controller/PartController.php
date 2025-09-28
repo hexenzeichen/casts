@@ -13,6 +13,7 @@ final class PartController extends AbstractController
     #[Route('/part', name: 'app_part_index')]
     public function index(StarshipPartRepository $repository, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $query = $request->query->get('query');
         $parts = $repository->findAllOrderedByPrice($query);
         return $this->render('part/index.html.twig', [
