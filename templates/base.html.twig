@@ -25,10 +25,17 @@
                 <a class="hover:text-amber-400  pt-2" href="{{ path('app_part_index') }}">
                     Parts
                 </a>
-                <a class="hover:text-amber-400 pt-2" href="{{ path('app_login') }}">Login</a>
-                <a class="rounded-[60px] py-2 px-5 bg-white/10 hover:bg-white/20" href="#">
-                    Get Started
-                </a>
+                {% if is_granted('ROLE_USER') %}
+                    <a class="nav-link text-black-50" href="{{ path('app_logout') }}">Log Out</a>
+                {% else %}
+                    <a class="nav-link text-black-50" href="{{ path('app_login') }}">Log In</a>
+                    <a href="#" class="btn btn-dark">Sign up</a>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item">
+                        <a class="hover:text-amber-400 pt-2" href="{{ path('admin_dashboard') }}">Admin</a>
+                    </li>
+                {% endif %}
             </nav>
         </header>
         {% block body %}{% endblock %}
