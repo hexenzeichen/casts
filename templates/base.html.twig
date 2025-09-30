@@ -26,10 +26,26 @@
                     Parts
                 </a>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <a class="hover:text-amber-400 pt-2" href="{{ path('_logout_main') }}">Log Out</a>
+                    <div class="dropdown">
+                        <button
+                            class="dropdown-toggle btn"
+                            type="button"
+                            id="user-dropdown"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            <img
+                                src="{{ app.user.avatarUri }}"
+                                alt="{{ app.user.displayName }} Avatar">
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="{{ path('_logout_main') }}">Log Out</a>
+                            </li>
+                        </ul>
+                    </div>
                 {% else %}
                     <a class="hover:text-amber-400 pt-2" href="{{ path('app_login') }}">Log In</a>
-                    <a href="#" class="btn btn-dark">Sign up</a>
                 {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
                         <a class="hover:text-amber-400 pt-2" href="{{ path('app_admin') }}">Admin</a>
