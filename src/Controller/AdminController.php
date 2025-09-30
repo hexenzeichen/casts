@@ -15,4 +15,11 @@ final class AdminController extends AbstractController
             'controller_name' => 'AdminController',
         ]);
     }
+
+    #[Route('/admin/comments', name: 'app_admin_comments')]
+    public function adminComments()
+    {
+        $this->denyAccessUnlessGranted('ROLE_COMMENT_ADMIN');
+        return new Response('Pretend comments admin page');
+    }
 }
