@@ -18,6 +18,7 @@ class StarshipController extends AbstractController
         Starship $ship,
     ): Response
     {
+        $this->denyAccessUnlessGranted('EDIT', $ship);
         return $this->render('starship/show.html.twig', [
             'ship' => $ship,
         ]);
