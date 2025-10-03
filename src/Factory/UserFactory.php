@@ -43,6 +43,7 @@ final class UserFactory extends PersistentObjectFactory
             'email' => self::faker()->email(),
             'firstName' => self::faker()->firstName(),
             'plainPassword' => 'tada',
+            'isVerified' => true,
         ];
     }
 
