@@ -58,6 +58,10 @@
                 {% endif %}
             </nav>
         </header>
+
+        {% for flash in app.flashes('success') %}
+            <div class="alert alert-success">{{ flash }}</div>
+        {% endfor %}
         {% block body %}{% endblock %}
     </div>
     <div class="p-5 bg-white/5 mt-3 text-center">

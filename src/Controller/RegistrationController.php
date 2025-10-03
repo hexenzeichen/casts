@@ -12,6 +12,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
+use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -20,8 +21,7 @@ class RegistrationController extends AbstractController
         Request $request,
         UserPasswordHasherInterface $userPasswordHasher,
         EntityManagerInterface $entityManager,
-        UserAuthenticatorInterface $userAuthenticator,
-        FormLoginAuthenticator $formLoginAuthenticator
+        VerifyEmailHelperInterface $verifyEmailHelper
     ): Response
     {
         $user = new User();
@@ -38,11 +38,13 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $userAuthenticator->authenticateUser(
-                $user,
-                $formLoginAuthenticator,
-                $request
+            $signatureComponents = $verifyEmailHelper->generateSignature(
+                'app_verify_email',
+                $user->getId(),
+                $user->getEmail(),
+                ['id' => $user->getId()]
             );
+            $this->addFlash('success', 'Confirm your email at: '.$signatureComponents->getSignedUrl());
 
             return $this->redirectToRoute('app_homepage');
         }
