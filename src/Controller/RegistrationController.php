@@ -51,4 +51,10 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form,
         ]);
     }
+
+    #[Route('//verify', name: 'app_verify_email')]
+    public function verifyUserEmail(): Response
+    {
+        // TODO
+    }
 }
