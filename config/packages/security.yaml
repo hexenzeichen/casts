@@ -18,6 +18,7 @@ security:
             pattern: ^/(_profiler|_wdt|assets|build)/
             security: false
         main:
+            login_throttling: true
             switch_user: true
             lazy: true
             provider: app_user_provider
