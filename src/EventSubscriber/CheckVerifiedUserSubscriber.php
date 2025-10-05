@@ -14,7 +14,6 @@ class CheckVerifiedUserSubscriber implements EventSubscriberInterface
     {
         return [
             CheckPassportEvent::class => ['onCheckPassport', -10],
-            LoginFailureEvent::class => 'onLoginFailure',
         ];
     }
 
@@ -30,8 +29,4 @@ class CheckVerifiedUserSubscriber implements EventSubscriberInterface
         }
     }
 
-    public function onLoginFailure(LoginFailureEvent $event)
-    {
-        // TODO do nothing
-    }
 }
