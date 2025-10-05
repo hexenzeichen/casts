@@ -3,6 +3,7 @@
 namespace App\EventSubscriber;
 
 use App\Entity\User;
+use App\Security\AccountNotVerifiedAuthenticationException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\CheckPassportEvent;
 use Symfony\Component\Security\Http\Event\LoginFailureEvent;
@@ -25,12 +26,12 @@ class CheckVerifiedUserSubscriber implements EventSubscriberInterface
             throw new \Exception('Unexpected user type');
         }
         if (!$user->isVerified()) {
-            throw new AccountNotVerifiedAuthenticationException();
+//            throw new AccountNotVerifiedAuthenticationException();
         }
     }
 
     public function onLoginFailure(LoginFailureEvent $event)
     {
-        dd($event);
+        // TODO do nothing
     }
 }
