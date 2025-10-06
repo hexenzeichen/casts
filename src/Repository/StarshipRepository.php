@@ -25,10 +25,11 @@ class StarshipRepository extends ServiceEntityRepository
     public function findIncompleteOrderedByDroidCount(): Pagerfanta
     {
         $query = $this->createQueryBuilder('s')
+            ->addSelect('COUNT(starshipDroid) as HIDDEN droidCount')
             ->andWhere('s.status != :status')
-            ->orderBy('COUNT(starshipDroid)', 'ASC')
             ->leftJoin('s.starshipDroids', 'starshipDroid')
             ->groupBy('s.id')
+            ->orderBy('droidCount', 'ASC')
             ->setParameter('status', StarshipStatusEnum::COMPLETED)
             ->getQuery()
            ;
