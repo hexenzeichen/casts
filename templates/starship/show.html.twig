@@ -3,59 +3,59 @@
 {% block title %}{{ ship.name }}{% endblock %}
 
 {% block body %}
-    <div class="my-4 px-8">
-        <a class="bg-white hover:bg-gray-200 rounded-xl p-2 text-black" href="{{ path('app_homepage') }}">
-            <svg class="inline text-black" xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#000" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+    <div class="my-3 px-4">
+        <a class="btn btn-light btn-sm rounded-3 text-dark" href="{{ path('app_homepage') }}">
+            <svg class="d-inline" xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#000" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
             Back
         </a>
     </div>
-    <div class="md:flex justify-center space-x-3 mt-5 px-4 lg:px-8">
-        <div class="flex justify-center">
-            <img class="max-h-[300px] md:max-h-[500px]" src="{{ asset('images/purple-rocket.png') }}" alt="purple ship launching">
+
+    <div class="d-md-flex justify-content-center gap-3 mt-4 px-3 px-lg-5">
+        <div class="d-flex justify-content-center">
+            <img style="max-height: 300px;" class="max-h-md-500" src="{{ asset('images/purple-rocket.png') }}" alt="purple ship launching">
         </div>
-        <div class="space-y-5">
-            <div class="mt-8 max-w-xl mx-auto">
-                <div class="px-8 pt-8">
-                    <div class="rounded-2xl py-1 px-3 flex justify-center w-32 items-center bg-amber-400/10">
-                        <div class="rounded-full h-2 w-2 bg-amber-400 blur-[1px] mr-2"></div>
-                        <p class="uppercase text-xs">{{ ship.statusString }}</p>
+
+        <div class="d-flex flex-column gap-3">
+            <div class="mt-4 mx-auto" style="max-width: 36rem;">
+                <div class="px-4 pt-4">
+                    <div class="status-badge">
+                        <div class="status-dot"></div>
+                        <span>{{ ship.statusString }}</span>
                     </div>
 
-                    <h1 class="text-[32px] font-semibold border-b border-white/10 pb-5 mb-5">
+                    <h1 class="fs-2 fw-semibold border-bottom border-subtle pb-4 mb-4">
                         {{ ship.name }}
                     </h1>
-                    <h4 class="text-xs text-slate-300 font-semibold mt-2 uppercase">Spaceship Captain</h4>
-                    <p class="text-[22px] font-semibold">{{ ship.captain }}</p>
 
-                    <h4 class="text-xs text-slate-300 font-semibold mt-2 uppercase">Class</h4>
-                    <p class="text-[22px] font-semibold">{{ ship.class }}</p>
+                    <p class="detail-label">Spaceship Captain</p>
+                    <p class="detail-value">{{ ship.captain }}</p>
 
-                    <h4 class="text-xs text-slate-300 font-semibold mt-2 uppercase">Ship Status</h4>
-                    <p class="text-[22px] font-semibold">30,000 lys to next service</p>
+                    <p class="detail-label">Class</p>
+                    <p class="detail-value">{{ ship.class }}</p>
 
-                    <h4 class="text-xs text-slate-300 font-semibold mt-2 uppercase">Arrived At</h4>
-                    <p class="text-[22px] font-semibold">{{ ship.arrivedAt|ago }}</p>
+                    <p class="detail-label">Ship Status</p>
+                    <p class="detail-value">30,000 lys to next service</p>
 
-                    <h4 class="text-xs text-slate-300 font-semibold mt-2 uppercase">
-                        Droids
-                    </h4>
-                    <p class="text-[22px] font-semibold">
+                    <p class="detail-label">Arrived At</p>
+                    <p class="detail-value">{{ ship.arrivedAt|ago }}</p>
+
+                    <p class="detail-label">Droids</p>
+                    <p class="detail-value">
                         {% for starshipDroid in ship.starshipDroids %}
-                            {{ starshipDroid.droid.name }} (assigned {{ starshipDroid.assignedAt|ago }} {% if not loop.last %}, {% endif %}
+                            {{ starshipDroid.droid.name }} (assigned {{ starshipDroid.assignedAt|ago }}{% if not loop.last %}, {% endif %})
                         {% else %}
                             No droids on board (clean up your own mess)
                         {% endfor %}
                     </p>
-                    <h4 class="text-xs text-slate-300 font-semibold mt-2 uppercase">
-                        Parts ({{ ship.parts|length }})
-                    </h4>
-                    <ul class="text-sm font-medium text-slate-400 tracking-wide">
+
+                    <p class="detail-label">Parts ({{ ship.parts|length }})</p>
+                    <ul class="list-unstyled small fw-medium text-secondary">
                         {% for part in ship.expensiveParts %}
-                            <li class="border-b border-slate-600 py-2">
-                                <span class="block text-white font-semibold">
+                            <li class="part-list-item">
+                                <span class="d-block text-white fw-semibold">
                                     {{ part.name }} (✦ {{ part.price }})
                                 </span>
-                                <span class="text-xs text-slate-500 italic">
+                                <span class="fst-italic" style="color: #64748b;">
                                     {{ part.notes }}
                                 </span>
                             </li>

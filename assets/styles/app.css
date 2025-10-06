@@ -1,5 +1,131 @@
-@import "tailwindcss";
+:root {
+    --color-amber: #f59e0b;
+    --color-bg-card: #16202A;
+    --color-text-muted: #94a3b8;
+    --color-border-subtle: rgba(255, 255, 255, 0.2);
+}
 
 body {
-    background-color: skyblue;
+    background: radial-gradient(102.21% 102.21% at 50% 28.75%, #00121C 42.62%, #013954 100%);
+    color: white;
+    min-height: 100vh;
+}
+
+/* Override Bootstrap link color for dark theme */
+a {
+    color: inherit;
+}
+
+a:hover {
+    color: var(--color-amber);
+}
+
+/* Nav links */
+.nav-link-app {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding-top: 0.5rem;
+}
+
+.nav-link-app:hover {
+    color: var(--color-amber);
+}
+
+/* Status badge */
+.status-badge {
+    background-color: rgba(245, 158, 11, 0.1);
+    border-radius: 9999px;
+    padding: 0.25rem 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    width: 8rem;
+    white-space: nowrap;
+}
+
+.status-dot {
+    height: 0.5rem;
+    width: 0.5rem;
+    min-width: 0.5rem;
+    border-radius: 50%;
+    background-color: var(--color-amber);
+    filter: blur(1px);
+    margin-right: 0.5rem;
+}
+
+/* Ship card */
+.ship-card {
+    background-color: var(--color-bg-card);
+    border-radius: 1rem;
+}
+
+/* Sidebar aside */
+.ship-aside {
+    border-color: var(--color-border-subtle) !important;
+    transition: all 0.3s;
+}
+
+@media (min-width: 992px) {
+    .ship-aside {
+        width: 411px;
+        flex-shrink: 0;
+        min-height: 100vh;
+        border-right: 1px solid var(--color-border-subtle);
+        border-bottom: none;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .ship-aside {
+        border-bottom: 1px solid var(--color-border-subtle);
+        padding-bottom: 2rem;
+    }
+}
+
+/* Subtle border color override */
+.border-subtle {
+    border-color: var(--color-border-subtle) !important;
+}
+
+/* Footer */
+.app-footer {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Parts page search input */
+.search-wrapper {
+    position: relative;
+    max-width: 28rem;
+}
+
+.search-wrapper svg {
+    position: absolute;
+    left: 0.75rem;
+    top: 0.75rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #9ca3af;
+}
+
+/* Detail page section labels */
+.detail-label {
+    font-size: 0.75rem;
+    color: #cbd5e1;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+}
+
+.detail-value {
+    font-size: 1.375rem;
+    font-weight: 600;
+}
+
+/* Part list */
+.part-list-item {
+    border-bottom: 1px solid #475569;
+    padding: 0.5rem 0;
 }
