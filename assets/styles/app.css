@@ -1,5 +1,44 @@
 @import "tailwindcss";
 
+/* Enable class-based dark mode for dark: utility variants */
+@variant dark (&:where(html.dark, html.dark *));
+
+:root {
+  /* Light mode (default) */
+  --color-bg-start:      #E8F4FD;
+  --color-bg-end:        #C5DFF0;
+  --color-surface:       #FFFFFF;
+  --color-text:          #0D1B26;
+  --color-text-muted:    #3D5A73;
+  --color-border:        rgba(13, 27, 38, 0.15);
+  --color-border-subtle: rgba(13, 27, 38, 0.10);
+  --color-overlay:       rgba(13, 27, 38, 0.05);
+  --color-svg-icon:      #0D1B26;
+  --color-back-btn-bg:   #0D1B26;
+  --color-back-btn-text: #FFFFFF;
+  --color-link:          #005A85;
+}
+
+html.dark {
+  --color-bg-start:      #00121C;
+  --color-bg-end:        #013954;
+  --color-surface:       #16202A;
+  --color-text:          #FFFFFF;
+  --color-text-muted:    oklch(70.4% 0.04 256.788); /* slate-400 */
+  --color-border:        rgba(255, 255, 255, 0.20);
+  --color-border-subtle: rgba(255, 255, 255, 0.10);
+  --color-overlay:       rgba(255, 255, 255, 0.05);
+  --color-svg-icon:      #FFFFFF;
+  --color-back-btn-bg:   #FFFFFF;
+  --color-back-btn-text: #000000;
+  --color-link:          #0086C4;
+}
+
 body {
-    background-color: skyblue;
+  background: radial-gradient(
+    102.21% 102.21% at 50% 28.75%,
+    var(--color-bg-start) 42.62%,
+    var(--color-bg-end) 100%
+  );
+  color: var(--color-text);
 }
